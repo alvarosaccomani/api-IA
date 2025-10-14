@@ -2,6 +2,7 @@ from flask import Blueprint, request, jsonify
 import requests
 import os
 from dotenv import load_dotenv
+from openai import OpenAI
 
 # Cargar variables de entorno desde el archivo .env
 load_dotenv()
@@ -38,6 +39,42 @@ def list_models():
             return jsonify(response.json())
         else:
             return jsonify({"error": response.text}), response.status_code
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@open_router_bp.route("/chat-model", methods=["POST"])
+def chat_model():
+    """
+    Endpoint para chatear contra OpenRouter.
+    """
+    try:
+        req = request.get_json()
+        model = req.get("model")
+        message = req.get("message")
+        print(model)
+        print(message)
+
+        # Creo el cliente
+        client = OpenAI(api_key=OPENROUTER_API_KEY, base_url=OPENROUTER_BASE_URL)
+
+        #Creo el chat
+        chat = client.chat.completions.create(
+            #model = "deepseek/deepseek-chat-v3.1:free",
+            model = model,
+            messages = [
+                {
+                    "role": "user",
+                    "content": message
+                }
+            ]
+        )
+
+        # Convierte el objeto chat a un diccionario
+        chat_dict = chat.model_dump() if hasattr(chat, "model_dump") else chat.__dict__
+
+        # Devuelve el diccionario como JSON
+        return jsonify(chat_dict)
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
