@@ -1,0 +1,62 @@
+# Entornos virtuales
+venv/
+env/
+.env
+.venv/
+
+# Archivos de IDE y edición
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Archivos de logs y caché
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.coverage
+.coverage.*
+.cache/
+.tox/
+.mypy_cache/
+.pytest_cache/
+.nox/
+
+# Archivos de configuración local
+config.local.py
+instance/
+*.cfg
+*.ini
+
+# Git
+.git
+.gitignore
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Documentación
+docs/
+README.md
+CHANGELOG.md
+LICENSE
+
+# Pruebas
+tests/
+test_*.py
+*_test.py
+
+# Archivos de dependencias alternativas
+Pipfile
+Pipfile.lock
+poetry.lock
+pyproject.toml  # solo si no lo usas en producción
+
+# Archivos temporales
+*.tmp
+*.log
