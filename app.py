@@ -1,9 +1,11 @@
 from flask import Flask
+from flask_cors import CORS
 from routes.embeddings import embeddings_bp
 from routes.health import health_bp
 from routes.open_router import open_router_bp
 
 app = Flask(__name__)
+CORS(app)
 
 # Registrar los blueprints
 app.register_blueprint(health_bp, url_prefix="/health")
